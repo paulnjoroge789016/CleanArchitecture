@@ -1,0 +1,3 @@
+include ':Domain'
+include ':app'
+rootProject.name = "Hilt"
