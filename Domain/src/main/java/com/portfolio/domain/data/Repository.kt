@@ -1,4 +1,7 @@
 package com.portfolio.domain.data
 
-class Repository {
+import javax.inject.Inject
+
+class Repository @Inject constructor(private val postDataSource: PostDataSource) {
+
 }

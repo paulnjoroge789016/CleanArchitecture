@@ -1,5 +1,8 @@
 package com.portfolio.domain
 
+
+
+
 /**
  * A good programmer writes code that can be understood
  * by humans
@@ -7,4 +10,5 @@ package com.portfolio.domain
 interface DataSource {
 
     fun getData() : String
+
 }

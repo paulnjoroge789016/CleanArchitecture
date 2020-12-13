@@ -1,6 +1,8 @@
 package com.portfolio.domain.data
 
-class JsonPlaceHolderPostDataSource: PostDataSource {
+import javax.inject.Inject
+
+class PostDataSourceImpl @Inject constructor() : PostDataSource{
     override fun getPost() {
         TODO("Not yet implemented")
     }

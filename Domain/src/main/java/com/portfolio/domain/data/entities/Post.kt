@@ -1,4 +1,4 @@
-package com.portfolio.domain.data.entities.domain
+package com.portfolio.domain.data.entities
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
