@@ -1,6 +1,7 @@
 package com.portfolio.domain.repository
 
 import com.portfolio.domain.data.entities.Post
+import com.portfolio.domain.data.entities.Result
 import kotlinx.coroutines.flow.Flow
 
 
@@ -10,11 +11,7 @@ import kotlinx.coroutines.flow.Flow
  */
 interface IPostRepository {
 
-    suspend fun getAll(): Flow<List<Post>>
+    suspend fun getAll(): Flow<Result<ArrayList<Post>>>
 
-    suspend fun post(): Flow<Post>
 
-    suspend fun update(id: Int): Flow<Post>
-
-    suspend fun delete(id: Int): Flow<Post>
 }
