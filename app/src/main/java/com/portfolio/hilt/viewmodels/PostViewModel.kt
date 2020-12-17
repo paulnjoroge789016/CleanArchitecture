@@ -4,7 +4,10 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.SavedStateHandle
+import com.portfolio.domain.data.entities.Post
+import com.portfolio.domain.data.entities.Result
 import com.portfolio.domain.usecases.GetAllPostsUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,19 +23,22 @@ class PostViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) {
 
-    private val _posts: MutableLiveData<Result<ArrayList<com.portfolio.data_remote.models.Post>>> = MutableLiveData()
-    val post: LiveData<Result<ArrayList<com.portfolio.data_remote.models.Post>>> get() = _posts
+    private val _posts: MutableLiveData<com.portfolio.domain.data.entities.Result<ArrayList<Post>>> = MutableLiveData()
+    val post: LiveData<Result<ArrayList<Post>>> get() = _posts
 
     fun getAllPosts() {
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            val posts  = postsUseCase.getAllPosts().collect{
-                _posts.value
+
+            postsUseCase.getAllPosts().collect {
+                _posts.postValue(it)
             }
 
 
         }
+
+
 
 
     }
