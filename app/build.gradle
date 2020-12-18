@@ -32,7 +32,7 @@ android {
     }
 
     dataBinding {
-        enabled  = true
+        android.buildFeatures.dataBinding  = true
     }
 }
 
@@ -73,5 +73,7 @@ dependencies {
     //viewmodel for viewmodelscope
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 
+    //Pagination
+    implementation 'android.arch.paging:runtime:2.1.0'
 
 }

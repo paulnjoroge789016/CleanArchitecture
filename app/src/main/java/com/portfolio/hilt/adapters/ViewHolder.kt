@@ -1,0 +1,15 @@
+package com.portfolio.hilt.adapters
+
+import android.view.View
+import androidx.databinding.ViewDataBinding
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.portfolio.hilt.databinding.SinglePostLayoutBinding
+
+/**
+ * A good programmer writes code that can be understood
+ * by humans
+ */
+class ViewHolder(binding: SinglePostLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+
+}
