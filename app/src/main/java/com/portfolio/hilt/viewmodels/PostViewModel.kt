@@ -3,9 +3,11 @@ package com.portfolio.hilt.viewmodels
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import androidx.paging.LivePagedListBuilder
 import com.portfolio.domain.data.entities.Post
 import com.portfolio.domain.data.entities.Result
 import com.portfolio.domain.usecases.GetAllPostsUseCase
+import com.portfolio.hilt.mappers.toPresentation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -20,16 +22,44 @@ class PostViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel(){
 
-    private val _posts: MutableLiveData<com.portfolio.domain.data.entities.Result<ArrayList<Post>>> = MutableLiveData()
-    val post: LiveData<Result<ArrayList<Post>>> get() = _posts
+    private val _posts: MutableLiveData<ArrayList<com.portfolio.hilt.models.Post>> = MutableLiveData()
+    val posts: LiveData<ArrayList<com.portfolio.hilt.models.Post>> get() = _posts
+
+    private val _loadingState: MutableLiveData<Boolean> = MutableLiveData()
+    val loadingState: LiveData<Boolean> get() = _loadingState
+
+    private val _errorMessage : MutableLiveData<String> = MutableLiveData()
+    val errorMessage : MutableLiveData<String> = MutableLiveData()
 
     fun getAllPosts() {
 
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
+            val posts = ArrayList<com.portfolio.hilt.models.Post>()
+            postsUseCase.getAllPosts().collect {results ->
+                when(results){
+                    is Result.Success ->{
+                        results.data.forEach {
+                            posts.add(
+                                it.toPresentation()
+                            )
 
+                        }
+                        _posts.postValue(posts)
 
-            postsUseCase.getAllPosts().collect {
-                _posts.postValue(it)
+                        val pagedlist = LivePagedListBuilder<>
+                        _loadingState.value = false
+                    }
+
+                    is Result.Loading -> {
+                        _loadingState.value = true
+                    }
+
+                    is Result.Failed -> {
+                        _loadingState.value = false
+                        _errorMessage.value = results.throwable.message
+                    }
+                }
+
             }
 
 
