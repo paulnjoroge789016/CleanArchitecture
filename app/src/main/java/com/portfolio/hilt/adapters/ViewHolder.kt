@@ -10,6 +10,4 @@ import com.portfolio.hilt.databinding.SinglePostLayoutBinding
  * A good programmer writes code that can be understood
  * by humans
  */
-class ViewHolder(binding: SinglePostLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-
-}
+class PostViewHolder(binding: SinglePostLayoutBinding) : RecyclerView.ViewHolder(binding.root)

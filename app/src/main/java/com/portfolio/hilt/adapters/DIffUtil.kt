@@ -9,11 +9,10 @@ import com.portfolio.hilt.models.Post
  */
 
 object PostDIffUtil: DiffUtil.ItemCallback<Post>() {
-    override fun areItemsTheSame(oldItem: Post, newItem: Post) = oldItem == newItem
+    override fun areItemsTheSame(oldItem: Post, newItem: Post) = oldItem.title == newItem.title
 
     override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
-        return (oldItem.body == newItem.body
-                && oldItem.title == newItem.title)
+        return (oldItem == newItem)
     }
 
 }
