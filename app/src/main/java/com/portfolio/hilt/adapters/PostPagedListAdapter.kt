@@ -2,23 +2,18 @@ package com.portfolio.hilt.adapters
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.paging.PagedListAdapter
-import com.portfolio.hilt.R
+import androidx.recyclerview.widget.RecyclerView
 import com.portfolio.hilt.databinding.SinglePostLayoutBinding
 
 import com.portfolio.hilt.models.Post
 import com.portfolio.hilt.viewmodels.PostViewModel
 
-
 /**
  * A good programmer writes code that can be understood
  * by humans
  */
-class PostPagedListAdapter (private val postViewModel: PostViewModel):
-    PagedListAdapter<Post, PostViewHolder>(PostDIffUtil) {
+class PostPagedListAdapter  (private val postViewModel: PostViewModel,private val posts: ArrayList<Post>): RecyclerView.Adapter<PostViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding =
             SinglePostLayoutBinding.inflate(LayoutInflater.from(parent.context),
@@ -29,8 +24,12 @@ class PostPagedListAdapter (private val postViewModel: PostViewModel):
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val post = getItem(position)!!
+        val post = posts[position]
         holder.binding!!.post = post
+    }
+
+    override fun getItemCount(): Int {
+        return posts.size
     }
 
 }

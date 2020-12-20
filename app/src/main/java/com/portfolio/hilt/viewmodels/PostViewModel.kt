@@ -3,13 +3,9 @@ package com.portfolio.hilt.viewmodels
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import androidx.paging.LivePagedListBuilder
-import com.portfolio.domain.data.entities.Post
 import com.portfolio.domain.data.entities.Result
 import com.portfolio.domain.usecases.GetAllPostsUseCase
 import com.portfolio.hilt.mappers.toPresentation
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -31,6 +27,10 @@ class PostViewModel @ViewModelInject constructor(
     private val _errorMessage : MutableLiveData<String> = MutableLiveData()
     val errorMessage : MutableLiveData<String> = MutableLiveData()
 
+    init {
+        _loadingState.value = true
+        _errorMessage.value = ""
+    }
     fun getAllPosts() {
 
         viewModelScope.launch {
@@ -46,7 +46,7 @@ class PostViewModel @ViewModelInject constructor(
                         }
                         _posts.postValue(posts)
 
-                        val pagedlist = LivePagedListBuilder<>
+//                        val pagedlist = LivePagedListBuilder<>
                         _loadingState.value = false
                     }
 
@@ -59,14 +59,7 @@ class PostViewModel @ViewModelInject constructor(
                         _errorMessage.value = results.throwable.message
                     }
                 }
-
             }
-
-
         }
-
-
-
-
     }
 }

@@ -48,4 +48,8 @@ dependencies {
 
     //coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+
+    //Pagination
+    implementation 'android.arch.paging:runtime:2.1.0'
+
 }
