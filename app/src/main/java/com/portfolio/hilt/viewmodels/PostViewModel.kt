@@ -3,6 +3,7 @@ package com.portfolio.hilt.viewmodels
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.portfolio.domain.data.entities.Post
 import com.portfolio.domain.data.entities.Result
 import com.portfolio.domain.usecases.GetAllPostsUseCase
 import com.portfolio.hilt.mappers.toPresentation
@@ -25,19 +26,21 @@ class PostViewModel @ViewModelInject constructor(
     val loadingState: LiveData<Boolean> get() = _loadingState
 
     private val _errorMessage : MutableLiveData<String> = MutableLiveData()
-    val errorMessage : MutableLiveData<String> = MutableLiveData()
+    val errorMessage : LiveData<String> get() = _errorMessage
 
+    val rawResults: MutableLiveData<Result<ArrayList<Post>>> = MutableLiveData()
     init {
         _loadingState.value = true
-        _errorMessage.value = ""
     }
     fun getAllPosts() {
 
         viewModelScope.launch {
             val posts = ArrayList<com.portfolio.hilt.models.Post>()
             postsUseCase.getAllPosts().collect {results ->
-                when(results){
-                    is Result.Success ->{
+                rawResults.postValue(results)
+                when(results) {
+
+                    is Result.Success -> {
                         results.data.forEach {
                             posts.add(
                                 it.toPresentation()
@@ -45,8 +48,6 @@ class PostViewModel @ViewModelInject constructor(
 
                         }
                         _posts.postValue(posts)
-
-//                        val pagedlist = LivePagedListBuilder<>
                         _loadingState.value = false
                     }
 
@@ -56,9 +57,11 @@ class PostViewModel @ViewModelInject constructor(
 
                     is Result.Failed -> {
                         _loadingState.value = false
-                        _errorMessage.value = results.throwable.message
+                        _errorMessage.postValue(results.message)
+//                        results.throwable.printStackTrace()
                     }
                 }
+
             }
         }
     }

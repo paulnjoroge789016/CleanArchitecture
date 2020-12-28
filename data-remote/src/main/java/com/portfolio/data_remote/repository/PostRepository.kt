@@ -27,8 +27,9 @@ class PostRepository @Inject constructor(
             }
             emit(Result.Success(posts))
         } catch (throwable: Throwable){
-            throwable.printStackTrace()
-            emit(Result.Failed(throwable))
+            emit(Result.Failed(throwable.message))
+
+
         }
     }
 

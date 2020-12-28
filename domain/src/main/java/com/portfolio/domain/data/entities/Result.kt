@@ -8,6 +8,6 @@ package com.portfolio.domain.data.entities
  */
 sealed class Result <out T>{
     data class Success<out T>(val data: T): Result<T>()
-    data class Failed(val throwable: Throwable): Result<Nothing>()
+    data class Failed(val message: String?): Result<Nothing>()
     object Loading: Result<Nothing>()
 }

@@ -27,8 +27,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var mainActivityBinding:  ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        mainActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        mainActivityBinding.lifecycleOwner = this
+        mainActivityBinding.viewModel = postViewModel
 
         postViewModel.getAllPosts()
         postViewModel.posts.observe(this, Observer {
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 mainActivityBinding.rvPosts.adapter = adapter
             }
         })
+
 
     }
 }
