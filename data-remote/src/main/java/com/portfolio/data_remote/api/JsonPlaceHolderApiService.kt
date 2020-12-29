@@ -16,5 +16,5 @@ interface JsonPlaceHolderApiService {
         "content-type: Application/json"
     )
     @GET("/posts")
-    suspend fun getPosts(): ArrayList<Post>X
+    suspend fun getPosts(): ArrayList<Post>
 }
