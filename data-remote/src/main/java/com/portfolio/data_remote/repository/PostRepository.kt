@@ -7,6 +7,8 @@ import com.portfolio.domain.data.entities.Post
 import com.portfolio.domain.repository.IPostRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
+import java.io.IOException
 import javax.inject.Inject
 
 /**
@@ -26,9 +28,12 @@ class PostRepository @Inject constructor(
                 posts.add(it.toDomain())
             }
             emit(Result.Success(posts))
-        } catch (throwable: Throwable){
-            emit(Result.Failed(throwable.message))
-
+        } catch (exception: IOException){
+            emit(Result.Failed(exception.message))
+        } catch (exception: HttpException){
+            val localizedMessage = exception.localizedMessage
+            exception.printStackTrace()
+            emit(Result.Failed(localizedMessage))
 
         }
     }
