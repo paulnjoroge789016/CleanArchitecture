@@ -19,8 +19,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-
-
     private val postViewModel: PostViewModel by viewModels()
 
     val TAG  = "Clean Architecture app"

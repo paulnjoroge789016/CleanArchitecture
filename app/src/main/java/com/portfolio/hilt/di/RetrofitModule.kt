@@ -16,10 +16,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-/**
- * A good programmer writes code that can be understood
- * by humans
- */
+
 
 @Module
 @InstallIn(ApplicationComponent::class)

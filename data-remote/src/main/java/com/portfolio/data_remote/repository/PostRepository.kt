@@ -11,10 +11,6 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-/**
- * A good programmer writes code that can be understood
- * by humans
- */
 class PostRepository @Inject constructor(
     private val jsonPlaceHolderApiService: JsonPlaceHolderApiService
 ) : IPostRepository {
