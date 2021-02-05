@@ -1,3 +1,5 @@
+package com.portfolio.data_remote.models
+
 import com.google.gson.annotations.SerializedName
 
 data class Post(
