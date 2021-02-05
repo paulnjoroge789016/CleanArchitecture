@@ -24,6 +24,7 @@
         android:layout_gravity="center"/>
 
     <TextView
+        android:id="@+id/tv_error_message"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,9 +39,10 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_margin="10dp"
-        android:background="#D0000000"/>
+        android:background="#D07C7979"/>
 
     <LinearLayout
+        android:id="@+id/layout_try_again"
         android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

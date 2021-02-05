@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
@@ -60,10 +63,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun createErrorPopupDialog(errorMessage: String?) {
 
+        val errorView = layoutInflater.inflate(R.layout.popup_error, null)
         val alertDialogBuilder =  AlertDialog.Builder(this@MainActivity)
         alertDialogBuilder.apply {
-
+            setView(errorView)
+            setFinishOnTouchOutside(false)
         }
+
+        val alertDialog  =  alertDialogBuilder.create()
+        alertDialog.show()
+        val btnTryAgain =  errorView.findViewById<LinearLayout>(R.id.layout_try_again)
+        val tvErrorMessage = errorView.findViewById<TextView>(R.id.tv_error_message)
+
+        btnTryAgain.setOnClickListener {
+            postViewModel.getAllPosts()
+            Toast.makeText(this@MainActivity, "Loading", Toast.LENGTH_SHORT).show()
+            alertDialog.hide()
+        }
+
+        tvErrorMessage.text = errorMessage
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
