@@ -1,8 +1,5 @@
 package com.portfolio.hilt
 
-import android.graphics.Point
-import android.nfc.Tag
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -12,16 +9,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.portfolio.hilt.adapters.PostPagedListAdapter
 import com.portfolio.hilt.databinding.ActivityMainBinding
 import com.portfolio.hilt.viewmodels.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -61,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createErrorPopupDialog(errorMessage: String?) {
 
+
         val errorView = layoutInflater.inflate(R.layout.popup_error, null)
         val alertDialogBuilder =  AlertDialog.Builder(this@MainActivity)
         alertDialogBuilder.apply {
@@ -69,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val alertDialog  =  alertDialogBuilder.create()
+        alertDialog.setCanceledOnTouchOutside(false)
         alertDialog.show()
         val btnTryAgain =  errorView.findViewById<LinearLayout>(R.id.layout_try_again)
         val tvErrorMessage = errorView.findViewById<TextView>(R.id.tv_error_message)
