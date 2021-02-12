@@ -16,8 +16,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.amlcurran.showcaseview.ShowcaseView
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget
 import com.portfolio.hilt.adapters.PostPagedListAdapter
 import com.portfolio.hilt.databinding.ActivityMainBinding
 import com.portfolio.hilt.viewmodels.PostViewModel
