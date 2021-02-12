@@ -40,7 +40,9 @@ ext {
     ]
 
     annotations = [
-            hilt :  "com.google.dagger:hilt-android-compiler:$hiltVersion"
+            hilt :  "com.google.dagger:hilt-android-compiler:$hiltVersion",
+            hiltViewModel :  "androidx.hilt:hilt-compiler:$hiltViewModelVersion"
+
     ]
 
     thirdPartyDependencies  = [

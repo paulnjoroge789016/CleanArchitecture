@@ -53,9 +53,14 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation generalDependencies.values()
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
+
+    //first time user tutorial
     testImplementation  testDependencies.values()
+    implementation 'com.github.amlcurran.showcaseview:library:5.4.3'
     androidTestImplementation testDependencies.values()
+
 
     implementation thirdPartyDependencies.values()
     kapt annotations.values()
