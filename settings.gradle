@@ -1,1 +1,4 @@
-include ':buildSystem'
+include ':data-remote'
+include ':domain'
+include ':app'
+rootProject.name = "Hilt"
