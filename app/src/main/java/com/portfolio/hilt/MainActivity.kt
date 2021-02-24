@@ -1,5 +1,6 @@
 package com.portfolio.hilt
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -11,7 +12,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.portfolio.hilt.adapters.PostPagedListAdapter
 import com.portfolio.hilt.databinding.ActivityMainBinding
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private val postViewModel: PostViewModel by viewModels()
 
-    val TAG  = "Clean Architecture app"
+    private val TAG  = "Clean Architecture app"
     lateinit var mainActivityBinding:  ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         mainActivityBinding.viewModel = postViewModel
 
         postViewModel.getAllPosts()
-        postViewModel.posts.observe(this, Observer {
+        postViewModel.posts.observe(this,  {
             if (it.size > 0 ){
                 it.forEach{post ->
                     Log.d(TAG,  post.toString())
@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("InflateParams")
     private fun createErrorPopupDialog(errorMessage: String?) {
 
 
